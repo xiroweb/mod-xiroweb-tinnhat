@@ -8,17 +8,18 @@
  */
 
 defined('_JEXEC') or die;
+
+$stylecss					= $params->get('stylecss', 'none');
+
+if	($stylecss != 'none') {
+	JHtml::_('stylesheet', 'mod_xiroweb_tinnhat/'.$stylecss.'.css', array('version' => 'auto', 'relative' => true));
+}
+
 ?>
 <div class="module<?php echo $moduleclass_sfx; ?> mod-tinnhat-<?php echo $stylecss; ?>">
 	<?php foreach ($list as $item) : ?>
 				<?php $images = json_decode($item->images);
 				 ?>
-			
-				<?php if (!empty($images->image_intro)): ?>
-					<a class="box-tinnhat-title <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
-						<img width="100%" src="<?php echo htmlspecialchars($images->image_intro, ENT_COMPAT, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt, ENT_COMPAT, 'UTF-8'); ?>" />
-					</a>
-				<?php endif;// if ($images->image_intro != ''): ?>
 					<<?php echo $params->get('title_heading', 'h1'); ?>>
 						<a class="box-tinnhat-title <?php echo $item->active; ?>" href="<?php echo $item->link; ?>"><?php echo $item->title; ?></a>
 					</<?php echo $params->get('title_heading', 'h1'); ?>>
@@ -54,6 +55,13 @@ defined('_JEXEC') or die;
 				<?php endif; ?>
 				</div>
 
+				
+				<?php if (!empty($images->image_intro)): ?>
+					<a class="box-tinnhat-title <?php echo $item->active; ?>" href="<?php echo $item->link; ?>">
+						<img width="100%" src="<?php echo htmlspecialchars($images->image_intro, ENT_COMPAT, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt, ENT_COMPAT, 'UTF-8'); ?>" />
+					</a>
+				<?php endif;// if ($images->image_intro != ''): ?>
+
 				<?php if ($params->get('show_introtext')) : ?>
 					<p class="box-tinnhat-introtext">
 						<?php echo $item->displayIntrotext; ?>
@@ -76,6 +84,6 @@ defined('_JEXEC') or die;
 							<?php endif; ?>
 						</a>
 					</p>
-				<?php endif; ?>	
+				<?php endif; ?>
 		<?php endforeach; ?>
 </div>
